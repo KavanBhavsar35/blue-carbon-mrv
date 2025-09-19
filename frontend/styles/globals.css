@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/* @plugin "tailwindcss-animate"; */
+/* @import "tw-animate-css"; */
+
+@custom-variant dark (&:is(.dark *));
+
+@config "../tailwind.config.mjs";
+
+@layer base {
+    h1,h2,h3,h4,h5,h6 {
+        @apply font-heading;
+    }
+    h1 {
+        @apply text-2xl font-semibold;
+    }
+
+    h2 {
+        @apply text-xl font-semibold;
+    }
+
+    h3 {
+        @apply text-lg font-semibold;
+    }
+
+    p {
+        @apply text-base leading-relaxed;
+    }
+}
