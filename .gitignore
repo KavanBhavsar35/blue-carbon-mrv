@@ -1,3 +1,9 @@
 directory_tree.txt
 selected_tree.txt
 context.txt
+
+# Python 
+__pycache__/
+*.pyc
+venv/
+demo/*
