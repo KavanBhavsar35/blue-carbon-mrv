@@ -1,6 +1,8 @@
 from app.database.base import BaseModel
 from app.extensions import db
 from sqlalchemy.orm import relationship
+from .auth import Session, Account
+
 import uuid
 
 class User(BaseModel):
@@ -28,46 +30,40 @@ class User(BaseModel):
         passive_deletes=True
     )
     
-    sessions = relationship(
-        "Session", 
-        backref="user", 
-        lazy="dynamic",
-        cascade="all, delete-orphan",
-        passive_deletes=True
-    )
-    
-    accounts = relationship(
-        "Account", 
-        backref="user", 
-        lazy="dynamic",
-        cascade="all, delete-orphan", 
-        passive_deletes=True
-    )
+    # sessions = relationship(
+    #     "Session", 
+    #     backref="user", 
+    #     lazy="dynamic",
+    #     cascade="all, delete-orphan",
+    #     passive_deletes=True
+    # )
+    sessions = relationship("Session", back_populates="user", cascade="all, delete-orphan")
+    accounts = relationship("Account", back_populates="user", cascade="all, delete-orphan")
     
     # Transactions where user is sender
-    sent_transactions = relationship(
-        "Transaction",
-        foreign_keys="Transaction.from_user_id",
-        backref="from_user",
-        lazy="dynamic"
-    )
+    # sent_transactions = relationship(
+    #     "Transaction",
+    #     foreign_keys="Transaction.from_user_id",
+    #     backref="from_user",
+    #     lazy="dynamic"
+    # )
     
     # Transactions where user is receiver  
-    received_transactions = relationship(
-        "Transaction",
-        foreign_keys="Transaction.to_user_id", 
-        backref="to_user",
-        lazy="dynamic"
-    )
+    # received_transactions = relationship(
+    #     "Transaction",
+    #     foreign_keys="Transaction.to_user_id", 
+    #     backref="to_user",
+    #     lazy="dynamic"
+    # )
     
     # Projects the user is associated with
-    projects = relationship(
-        "ProjectUser",
-        backref="user",
-        lazy="dynamic",
-        cascade="all, delete-orphan",
-        passive_deletes=True
-    )
+    # projects = relationship(
+    #     "ProjectUser",
+    #     backref="user",
+    #     lazy="dynamic",
+    #     cascade="all, delete-orphan",
+    #     passive_deletes=True
+    # )
     
     def __repr__(self):
         return f"<User(id='{self.id}', email='{self.email}')>"

@@ -16,12 +16,12 @@ try:
     
     # Create application
     app = create_app()
-    
     # Startup diagnostics
     with app.app_context():
         print(f"📦 Application Configuration:")
         print(f"   Environment: {'DEVELOPMENT' if app.config['DEBUG'] else 'PRODUCTION'}")
-        print(f"   Database: {app.config['SQLALCHEMY_DATABASE_URI'].split('@')[-1] if '@' in app.config['SQLALCHEMY_DATABASE_URI'] else 'SQLite'}")
+        # print(f"   Database: {app.config['SQLALCHEMY_DATABASE_URI'].split('@')[-1] if '@' in app.config['SQLALCHEMY_DATABASE_URI'] else 'SQLite'}")
+        print(f"   Database: {app.config['SQLALCHEMY_DATABASE_URI'] if '@' in app.config['SQLALCHEMY_DATABASE_URI'] else 'SQLite'}")
         print(f"   Debug Mode: {app.config['DEBUG']}")
         
         # Count registered routes
